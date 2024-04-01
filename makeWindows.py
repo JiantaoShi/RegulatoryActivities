@@ -37,26 +37,26 @@ for text in anno:
 	gene_body = parseInterval(gene_locus)
 	gene_regu = parseInterval(reg_locus)
 	gene_prom = parseInterval(promoter)
-	tag = gene_id + '.' + gene_name
-	bed = [CHROM, POS - HWP, POS + HWP, tag + '.P.0']
+	tag = gene_id + '_' + gene_name
+	bed = [CHROM, POS - HWP, POS + HWP, tag + '_P_0']
 	res.append(bed)
 	if STRAND == '+':
 		# promoter
 		nu = round((POS - gene_prom[0])/HWP/2)
 		for i in range(1, nu):
 			center = POS - i*2*HWP
-			bed = [CHROM, center - HWP, center + HWP, tag + '.PU.' + str(i)]
+			bed = [CHROM, center - HWP, center + HWP, tag + '_PU_' + str(i)]
 			res.append(bed)
 		nd = round((gene_prom[1] - POS)/HWP/2)
 		for i in range(1, nd):
 			center = POS + i*2*HWP
-			bed = [CHROM, center - HWP, center + HWP, tag + '.PD.' + str(i)]
+			bed = [CHROM, center - HWP, center + HWP, tag + '_PD_' + str(i)]
 			res.append(bed)
 		# upstream distal
 		nud = round((gene_prom[0] - gene_regu[0])/HWE/2)
 		for i in range(0, nud):
 			center = gene_prom[0] - i*2*HWE
-			bed = [CHROM, center - HWE, center + HWE, tag + '.EU.' + str(i)]
+			bed = [CHROM, center - HWE, center + HWE, tag + '_EU_' + str(i)]
 			res.append(bed)
 		# gene body
 		gene_body[0] = gene_body[0] + args.cut_length
@@ -65,32 +65,32 @@ for text in anno:
 			HWB = round(bodySize/args.bin_numbers/2)
 			for i in range(1, args.bin_numbers + 1):
 				center = gene_body[0] + i*2*HWB
-				bed = [CHROM, center - HWB, center + HWB, tag + '.B.' + str(i)]
+				bed = [CHROM, center - HWB, center + HWB, tag + '_B_' + str(i)]
 				res.append(bed)
 		# downstream distal
 		if gene_regu[1] - gene_body[1] > 2*HWE:
 			ndd = round((gene_regu[1] - gene_body[1])/HWE/2)
 			for i in range(1, ndd):
 				center = gene_body[1] + 2*i*HWE
-				bed = [CHROM, center - HWE, center + HWE, tag + '.ED.' + str(i)]
+				bed = [CHROM, center - HWE, center + HWE, tag + '_ED_' + str(i)]
 				res.append(bed)
 	elif STRAND == '-':
 		# promoter
 		nd = round((POS - gene_prom[0])/HWP/2)
 		for i in range(1, nd):
 			center = POS - i*2*HWP
-			bed = [CHROM, center - HWP, center + HWP, tag + '.PD.' + str(i)]
+			bed = [CHROM, center - HWP, center + HWP, tag + '_PD_' + str(i)]
 			res.append(bed)
 		nu = round((gene_prom[1] - POS)/HWP/2)
 		for i in range(1, nu):
 			center = POS + 2*i*HWP
-			bed = [CHROM, center - HWP, center + HWP, tag + '.PU.' + str(i)]
+			bed = [CHROM, center - HWP, center + HWP, tag + '_PU_' + str(i)]
 			res.append(bed)
 		# upstream distal
 		nud = round((gene_regu[1] - gene_prom[1])/HWE/2)
 		for i in range(1, nud):
 			center = gene_prom[1] + i*2*HWE
-			bed = [CHROM, center - HWE, center + HWE, tag + '.EU.' + str(i)]
+			bed = [CHROM, center - HWE, center + HWE, tag + '_EU_' + str(i)]
 			res.append(bed)
 		# gene body
 		gene_body[1] = gene_body[1] - args.cut_length
@@ -99,14 +99,14 @@ for text in anno:
 			HWB = round(bodySize/args.bin_numbers/2)
 			for i in range(1, args.bin_numbers + 1):
 				center = gene_body[1] - i*2*HWB
-				bed = [CHROM, center - HWB, center + HWB, tag + '.B.' + str(i)]
+				bed = [CHROM, center - HWB, center + HWB, tag + '_B_' + str(i)]
 				res.append(bed)
 		# downstream distal
 		if gene_body[0] - gene_regu[0] > 2*HWE:
 			ndd = round((gene_body[0] - gene_regu[0])/HWE/2)
 			for i in range(1, ndd):
 				center = gene_body[0] - 2*i*HWE
-				bed = [CHROM, center - HWE, center + HWE, tag + '.ED.' + str(i)]
+				bed = [CHROM, center - HWE, center + HWE, tag + '_ED_' + str(i)]
 				res.append(bed)
 
 df = pd.DataFrame(res, columns = ['CHROM', 'start', 'end', 'name'])
