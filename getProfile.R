@@ -76,5 +76,5 @@ if(is.null(args$BED)){
 	outFeature[rownames(tmp),2] = tmp[, 2]
 
 	out = cbind(outAll, outFeature)
-	write.table(outAll, file = paste0(args$outTag, '_profile.tsv'), row.names = TRUE, col.names = TRUE, sep = '\t', quote = FALSE)
+	write.table(out, file = paste0(args$outTag, '_profile.tsv'), row.names = TRUE, col.names = TRUE, sep = '\t', quote = FALSE)
 }
