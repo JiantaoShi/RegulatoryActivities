@@ -54,7 +54,7 @@ for text in anno:
 			res.append(bed)
 		# upstream distal
 		nud = round((gene_prom[0] - gene_regu[0])/HWE/2)
-		for i in range(0, nud):
+		for i in range(1, nud):
 			center = gene_prom[0] - i*2*HWE
 			bed = [CHROM, center - HWE, center + HWE, tag + '_EU_' + str(i)]
 			res.append(bed)
