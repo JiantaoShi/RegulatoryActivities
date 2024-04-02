@@ -128,3 +128,5 @@ To plot one profile:
 ```
 Rscript plotProfile.R --profile_file esophagus_T_profile.tsv --outTag esophagus_T
 ```
+
+<img src="images/Profile_example.png" width="1024" />
