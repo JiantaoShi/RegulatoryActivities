@@ -123,3 +123,8 @@ Options:
         -h, --help
                 Show this help message and exi
 ```
+
+To plot one profile:
+```
+Rscript plotProfile.R --profile_file esophagus_T_profile.tsv --outTag esophagus_T
+```
