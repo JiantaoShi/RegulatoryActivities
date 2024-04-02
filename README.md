@@ -6,7 +6,7 @@ output:
 ---
 ***
 
-# Abstract
+# Introduction
 Here is a set of scripts for the for exploring regulatory potential of predefined regions.
 
 ## making windows regarding gene structures
